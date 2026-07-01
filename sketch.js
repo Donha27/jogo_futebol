@@ -1,5 +1,6 @@
 let posInicial = 550;
-let novaPos = posInicial;
+let posX = posInicial;
+let posY;
 let campo;
 let jogador;
 let bola;
@@ -12,22 +13,23 @@ function preload(){
 }
 function setup() {
   createCanvas(800, 600);
+  posY = random(50, 550);
 }
 function novaPosicao(){
-  
+  if (posX < 1){
+  posY = random(50, 550);
+  perdidos++;
+  posX = posInicial;
+  }
 }
 function draw() {
   background(campo);
-  image(jogador, 1, mouseY-75,150,150);
-  
-  
-  image(bola, novaPos,1,50,50);
-  novaPos = novaPos - 4;
+  image(jogador, 1, mouseY-75, 150, 150);
+  image(bola, posX ,posY , 50, 50);
 
-  if (novaPos < 1){
-    perdidos++;
-    novaPos = posInicial;
-  }
+  posX = posX - 4;
+
+  novaPosicao();
   
   
 }
